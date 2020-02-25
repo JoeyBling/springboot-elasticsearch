@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/springboot-elasticsearch/springboot-elasticsearch_%d{yyyyMMdd}.log
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+        <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+    </appender>
+
+    <appender name="stash" class="net.logstash.logback.appender.LogstashSocketAppender">
+        <host>192.168.1.29</host>
+        <port>514</port>
+        <!-- 全局自定义字段 -->
+        <customFields>{"appname":"springboot-elasticsearch"}</customFields>
+        <!-- 自定义标准字段名称 -->
+        <fieldNames>
+            <timestamp>time</timestamp>
+            <message>msg</message>
+        </fieldNames>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="stash"/>
+    </root>
+
+    <logger name="io.gitee.zhousiwei" level="debug">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
