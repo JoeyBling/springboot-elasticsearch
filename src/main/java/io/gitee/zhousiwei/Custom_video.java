@@ -73,7 +73,7 @@ public class Custom_video {
         PreparedStatement pstmt;
         String insert = "insert into cms_info_custom(f_info_id,f_key,f_value) values(?,?,?)";
         try {
-            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String content = rs.getString("content");
@@ -125,7 +125,7 @@ public class Custom_video {
         PreparedStatement pstmt;
         String insert = "insert into cms_info_custom(f_info_id,f_key,f_value) values(?,?,?)";
         try {
-            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String content = rs.getString("content");
@@ -177,7 +177,7 @@ public class Custom_video {
         PreparedStatement pstmt;
         String insert = "insert into cms_info_custom(f_info_id,f_key,f_value) values(?,?,?)";
         try {
-            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String content = rs.getString("content");

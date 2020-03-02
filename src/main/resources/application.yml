@@ -1,8 +1,16 @@
 spring:
-    data:
-        elasticsearch:
-            cluster-nodes: 192.168.1.29:9300  #配置es节点信息,逗号分隔
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.1.29:9300  #配置es节点信息,逗号分隔
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+
 server:
-    port: 80
-    tomcat:
-        uri-encoding: UTF-8
+  port: 80
+  tomcat:
+    uri-encoding: UTF-8

@@ -4,7 +4,7 @@
 
     <groupId>io.gitee.zhousiwei</groupId>
     <artifactId>springboot-elasticsearch</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>springboot-elasticsearch</name>
