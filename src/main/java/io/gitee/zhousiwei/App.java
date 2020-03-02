@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,7 +19,6 @@ import java.util.Collections;
  *
  * @author Created by 試毅-思伟 on 2018/8/16
  */
-@EnableScheduling
 @ServletComponentScan
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @SpringBootApplication(scanBasePackages = {App.scanBasePackages})
