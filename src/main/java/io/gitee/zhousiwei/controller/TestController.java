@@ -2,15 +2,14 @@ package io.gitee.zhousiwei.controller;
 
 import io.gitee.zhousiwei.entity.Test;
 import io.gitee.zhousiwei.repository.TestRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.security.SecureRandom;
 import java.util.*;
 
 /**
@@ -19,26 +18,22 @@ import java.util.*;
  * @author Created by 試毅-思伟 on 2018/8/17
  */
 @RestController("/")
+@Slf4j
 public class TestController {
-
-    /**
-     * 定义一个全局的记录器，通过LoggerFactory获取
-     */
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private Integer min = 1;
     private Integer max = 10000;
-    private Random random = new Random();
+    private SecureRandom random = new SecureRandom();
 
     @Resource
     private TestRepository testRepository;
     //@Resource
-    //private ElasticsearchTemplate elasticsearchTemplate;
+    //private org.springframework.data.elasticsearch.core.ElasticsearchTemplate elasticsearchTemplate;
 
     @GetMapping(value = {"/", ""})
     public Object index() {
         long count = testRepository.count();
-        logger.info("ELasticSearch索引总数:{}", count);
+        log.info("ELasticSearch索引总数:{}", count);
         return count;
     }
 
@@ -103,7 +98,7 @@ public class TestController {
         test.setName("更新后的This is 雾都");
         test.setReadNumber(rangeInteger);
         Test save = testRepository.save(test);
-        logger.debug(save.toString());
+        log.debug(save.toString());
         map.put("code", 200);
         map.put("msg", "更新成功");
         return new ResponseEntity(map, HttpStatus.OK);
