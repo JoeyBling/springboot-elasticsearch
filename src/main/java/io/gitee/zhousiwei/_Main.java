@@ -50,9 +50,9 @@ public class _Main {
                 int id = rs.getInt("id");
                 int catid = rs.getInt("catid");
 
-                List<String> list_src = getSrcContent(content, src_regex);
-                List<String> list_href = getSrcContent(content, href_regex);
-                for (String str : list_src) {
+                List<String> srcList = getSrcContent(content, SRC_REGEX);
+                List<String> hrefList = getSrcContent(content, HREF_REGEX);
+                for (String str : srcList) {
                     if (StringUtils.isEmpty(str)) {
                         continue;
                     }
@@ -61,25 +61,22 @@ public class _Main {
                             || str.toLowerCase().contains(".png") || str.toLowerCase().contains(".gif")
                             || str.toLowerCase().contains(".bmp")) {
                         //continue;
-                        //System.out.print("有js");
                     } else {
                         pstmt = (PreparedStatement) conn.prepareStatement(insert);
                         pstmt.setInt(1, id);
                         pstmt.setInt(2, catid);
                         pstmt.setString(3, str);
                         pstmt.executeUpdate();
-                        //System.out.println(str);
                     }
                 }
-                for (String href : list_href) {
+                for (String href : hrefList) {
                     if (StringUtils.isEmpty(href)) {
                         continue;
                     }
                     if (href.toLowerCase().contains(".xls") || href.toLowerCase().contains(".xlsx")
                             || href.toLowerCase().contains(".doc") || href.toLowerCase().contains(".docx")
                             || href.toLowerCase().contains(".ppt") || href.toLowerCase().contains(".pdf")) {
-                        //System.out.println(href);
-                        pstmt = (PreparedStatement) conn.prepareStatement(insert);
+                        pstmt = conn.prepareStatement(insert);
                         pstmt.setInt(1, id);
                         pstmt.setInt(2, catid);
                         pstmt.setString(3, href);
@@ -95,10 +92,18 @@ public class _Main {
         System.out.println("----------Finished----------");
     }
 
-    static String src_regex = "(?i)src=\"([^\"]*)\"";
-    static String href_regex = "(?i)href=\"([^\"]*)\"";
+    /**
+     * 获取src正则
+     */
+    protected final static String SRC_REGEX = "(?i)src=\"([^\"]*)\"";
+    /**
+     * 获取href正则
+     */
+    protected final static String HREF_REGEX = "(?i)href=\"([^\"]*)\"";
 
-    //获取src或href里面的内容
+    /**
+     * 获取src或href里面的内容
+     */
     public static List<String> getSrcContent(String str, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);

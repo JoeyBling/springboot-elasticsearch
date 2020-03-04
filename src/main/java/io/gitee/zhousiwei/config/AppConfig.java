@@ -24,7 +24,7 @@ public class AppConfig {
      * @return ObjectMapper
      */
     @Bean
-    public ObjectMapper ObjectMapper() {
+    public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
         // 取消timestamps形式

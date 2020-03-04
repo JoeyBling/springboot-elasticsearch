@@ -21,14 +21,14 @@ import java.util.Collections;
  */
 @ServletComponentScan
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@SpringBootApplication(scanBasePackages = {App.scanBasePackages})
+@SpringBootApplication(scanBasePackages = {App.SCAN_BASE_PACKAGES})
 @Slf4j
 public class App extends SpringBootServletInitializer {
 
     /**
      * 扫描包名
      */
-    public static final String scanBasePackages = "io.gitee.zhousiwei";
+    public static final String SCAN_BASE_PACKAGES = "io.gitee.zhousiwei";
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(App.class);

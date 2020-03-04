@@ -7,7 +7,7 @@ import java.sql.*;
 /**
  * @author Created by 試毅-思伟 on 2018/12/03
  */
-public class Custom_video {
+public class CustomVideo {
 
     private static Connection getConn() {
         String driver = "com.mysql.jdbc.Driver";
